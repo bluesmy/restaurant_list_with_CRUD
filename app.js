@@ -20,9 +20,38 @@ db.once('open', () => {
 // 載入 restaurant model
 const Restaurant = require('./models/restaurant.js')
 
-// 設定第一個首頁路由
+// 設定路由
+// Restaurant 首頁
 app.get('/', (req, res) => {
-  res.send('hello world')
+  res.send('hello world!')
+})
+// 列出全部 Restaurant
+app.get('/restaurants', (req, res) => {
+  res.send('列出所有 Restaurant')
+})
+// 新增一筆 Restaurant 頁面
+app.get('/restaurants/new', (req, res) => {
+  res.send('新增 Restaurant 頁面')
+})
+// 顯示一筆 Restaurant 的詳細內容
+app.get('/restaurants/:id', (req, res) => {
+  res.send('顯示 Restaurant 的詳細內容')
+})
+// 新增一筆 Restaurant
+app.post('/restaurants', (req, res) => {
+  res.send('建立 Restaurant')
+})
+// 修改 Restaurant 頁面
+app.get('/restaurants/:id/edit', (req, res) => {
+  res.send('修改 Restaurant 頁面')
+})
+// 修改 Restaurant
+app.post('/restaurants/:id/edit', (req, res) => {
+  res.send('修改 Restaurant')
+})
+// 刪除 Restaurant
+app.post('/restaurants/:id/delete', (req, res) => {
+  res.send('刪除 Restaurant')
 })
 
 // 設定 express port 3000
