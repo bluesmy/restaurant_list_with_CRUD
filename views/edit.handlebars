@@ -1,0 +1,12 @@
+<form action="/restaurants/{{restaurant.id}}/edit" method="POST">
+  <input type="text" placeholder="中文名稱" name="name" value="{{restaurant.name}}">
+  <input type="text" placeholder="英文名稱" name="name_en" value="{{restaurant.name_en}}">
+  <input type="text" placeholder="類別" name="category" value="{{restaurant.category}}">
+  <input type="text" placeholder="圖片" name="image" value="{{restaurant.image}}">
+  <input type="text" placeholder="地址" name="location" value="{{restaurant.location}}">
+  <input type="text" placeholder="電話" name="phone" value="{{restaurant.phone}}">
+  <input type="text" placeholder="google地圖位址" name="google_map" value="{{restaurant.google_map}}">
+  <input type="number" placeholder="評分" name="rating" value="{{restaurant.rating}}">
+  <input type="text" placeholder="描述" name="description" value="{{restaurant.description}}">
+  <button type="submit">Edit</button>
+</form>
