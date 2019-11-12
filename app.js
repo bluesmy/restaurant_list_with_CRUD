@@ -3,7 +3,12 @@ const app = express()                            // 建立 express instance
 const mongoose = require('mongoose')
 
 // 引用 express-handlebars
-const exphbs = require('express-handlebars');
+const exphbs = require('express-handlebars')
+
+// 引用 body-parser
+const bodyParser = require('body-parser')
+// 設定 bodyParser
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // 告訴 express 使用 handlebars 當作 template engine 並預設 layout 是 main
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -41,7 +46,7 @@ app.get('/restaurants', (req, res) => {
 })
 // 新增一筆 Restaurant 頁面
 app.get('/restaurants/new', (req, res) => {
-  res.send('新增 Restaurant 頁面')
+  return res.render('new')
 })
 // 顯示一筆 Restaurant 的詳細內容
 app.get('/restaurants/:id', (req, res) => {
@@ -49,7 +54,22 @@ app.get('/restaurants/:id', (req, res) => {
 })
 // 新增一筆 Restaurant
 app.post('/restaurants', (req, res) => {
-  res.send('建立 Restaurant')
+  const restaurant = new Restaurant({
+    name: req.body.name,
+    name_en: req.body.name_en,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description
+  })
+
+  restaurant.save(err => {
+    if (err) return console.error(err)
+    return res.redirect('/')
+  })
 })
 // 修改 Restaurant 頁面
 app.get('/restaurants/:id/edit', (req, res) => {
