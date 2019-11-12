@@ -30,11 +30,14 @@ const Restaurant = require('./models/restaurant.js')
 // 設定路由
 // Restaurant 首頁
 app.get('/', (req, res) => {
-  res.render('index')
+  Restaurant.find((err, restaurants) => {
+    if (err) return console.error(err)
+    return res.render('index', { restaurants: restaurants })
+  })
 })
 // 列出全部 Restaurant
 app.get('/restaurants', (req, res) => {
-  res.send('列出所有 Restaurant')
+  return res.redirect('/')
 })
 // 新增一筆 Restaurant 頁面
 app.get('/restaurants/new', (req, res) => {
