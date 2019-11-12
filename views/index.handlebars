@@ -16,6 +16,8 @@
   </div>
 </div>
 
+<a href="/restaurants/new">Create</a>
+
 <!-- restaurant list -->
 <div class="container mt-5">
   <div class="row">
@@ -36,6 +38,10 @@
                 {{this.rating}}
                 <i class="fas fa-star fa-xs"></i>
               </span>
+
+              <form action="/restaurants/{{{this.id}}}/delete" method="POST" style="display: inline;">
+                <button type="submit">delete</button>
+              </form>
 
             </div>
           </div>
