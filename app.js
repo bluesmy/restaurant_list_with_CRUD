@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+app.use(express.static('public'))
+
 mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
 
 // mongoose 連線後透過 mongoose.connection 拿到 Connection 的物件
@@ -50,7 +52,10 @@ app.get('/restaurants/new', (req, res) => {
 })
 // 顯示一筆 Restaurant 的詳細內容
 app.get('/restaurants/:id', (req, res) => {
-  res.send('顯示 Restaurant 的詳細內容')
+  Restaurant.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+    return res.render('show', { restaurant: restaurant })
+  })
 })
 // 新增一筆 Restaurant
 app.post('/restaurants', (req, res) => {
