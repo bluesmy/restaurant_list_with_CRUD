@@ -113,6 +113,22 @@ app.post('/restaurants/:id/delete', (req, res) => {
   })
 })
 
+// 搜尋 Restaurant
+app.get('/search', (req, res) => {
+  const keywordRegex = new RegExp(req.query.keyword, 'i')
+  Restaurant.find(
+    {
+      $or: [
+        { name: { $regex: keywordRegex, $options: "$i" } },
+        { category: { $regex: keywordRegex } }
+      ]
+    },
+    (err, restaurants) => {
+      if (err) return console.error(err)
+      return res.render('index', { restaurants, keyword: req.query.keyword })
+    })
+})
+
 // 設定 express port 3000
 app.listen(3000, () => {
   console.log('App is running')
